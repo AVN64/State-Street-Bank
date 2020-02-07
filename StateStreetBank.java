@@ -65,8 +65,9 @@ public class StateStreetBank
                 //String transID = transaction();
                 String transID = transaction(filePath);
                 /*JOptionPane.showMessageDialog(null,"Account: " + account + "\nCompany: " +
-                company + "\nFirst Name: " + firstName + "\nLast Name: " +
-                 lastName + "\nTransaction ID: " + transID);*/
+                company + "\nFirst Name: " + firstName + "\nLast Name: " + lastName + 
+                "\nAddress 1: " + address1 + "\nAddress 2: " + address2 + "\nCity: " +
+                city + "\nState: " + state + "\nZIP Code: " + zipCode);*/
                 JOptionPane.showMessageDialog(null,"Transaction ID: " + transID);
             }
             else
