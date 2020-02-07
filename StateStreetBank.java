@@ -1,11 +1,13 @@
+/*Bank application that generates a random transaction ID for an account ID entered by
+the user*/
 import java.io.File;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 public class StateStreetBank
 {
-    private static Scanner read;
-    private static Scanner input;
+    private static Scanner read;//Scanner class object to read and parse csv file.
+    private static Scanner input;//Scanner class object for command-line input.
 
     public static void main(String[] args)
     {
@@ -23,6 +25,7 @@ public class StateStreetBank
         readRecord(searchTerm, filePath);//Call method to obtain transaction ID.
     }
 
+    //Void method to read and search records in a csv file using Scanner class object.
     public static void readRecord(String searchTerm, String filePath)
     {
         boolean found = false;//Boolean value to determine correct account ID.
@@ -42,7 +45,7 @@ public class StateStreetBank
             read = new Scanner(new File(filePath));//Opens customer.csv file
             read.useDelimiter("[,\n]");//Delimiter to parse String tokens.
 
-            while(read.hasNext() && !found)//while loop to search customer record.
+            while(read.hasNext() && !found)//while loop to search customer records.
             {
                 account = read.next();
                 company = read.next();
@@ -59,7 +62,7 @@ public class StateStreetBank
                     found = true;
                 }
             }
-
+            //Conditional statement where valid account ID recieves transaction ID.
             if(found)
             {
                 //String transID = transaction();
@@ -81,6 +84,7 @@ public class StateStreetBank
         }
     }
 
+    //Accessor method to use Transaction ID class object to generate transaction ID.
     //public static String transaction()
     public static String transaction(String filePath)
     {
