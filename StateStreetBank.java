@@ -20,12 +20,12 @@ public class StateStreetBank
         JOptionPane.INFORMATION_MESSAGE);
         searchTerm = searchTerm.toLowerCase();
 
-        readRecord(searchTerm, filePath);
+        readRecord(searchTerm, filePath);//Call method to obtain transaction ID.
     }
 
     public static void readRecord(String searchTerm, String filePath)
     {
-        boolean found = false;
+        boolean found = false;//Boolean value to determine correct account ID.
 
         //Nine attributes of a customer record.
         String account = "";
