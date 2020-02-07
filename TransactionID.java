@@ -17,7 +17,7 @@ public class TransactionID
     //final private String filePath = "customers.csv";
     private String filePath;
 
-    //Nine tokens to collect from csv file.
+    //Nine tokens to collect from csv file. Instance variables(fields).
     private String account = "";
     private String company = "";
     private String firstName = "";
@@ -102,12 +102,16 @@ public class TransactionID
                 zipCode = read.next();
 
                 String transID = getTransactionID();
-                System.out.println(index + " " + company + "  " + transID);
+                System.out.printf("%-3d %-35s %s%n", index, company, transID);
             }
         } 
-        catch (Exception e) {
-
+        catch (Exception e)
+        {
             System.out.println("Error.");
+        }
+        finally
+        {
+            read.close();
         }
     }
 }//End of TransacationID class.
