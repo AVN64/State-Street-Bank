@@ -62,7 +62,8 @@ public class StateStreetBank
 
             if(found)
             {
-                String transID = transaction();
+                //String transID = transaction();
+                String transID = transaction(filePath);
                 /*JOptionPane.showMessageDialog(null,"Account: " + account + "\nCompany: " +
                 company + "\nFirst Name: " + firstName + "\nLast Name: " +
                  lastName + "\nTransaction ID: " + transID);*/
@@ -79,10 +80,11 @@ public class StateStreetBank
         }
     }
 
-    public static String transaction()
+    //public static String transaction()
+    public static String transaction(String filePath)
     {
-        TransactionID t1 = new TransactionID();//Declare TransactionID class object.
-        String transID = t1.getTransactionID();
+        TransactionID t1 = new TransactionID(filePath);//Declare TransactionID class object.
+        String transID = t1.getTransactionID();//Assign transaction ID to String variable.
         return transID;
     }
 }
