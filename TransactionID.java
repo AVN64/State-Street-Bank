@@ -90,8 +90,8 @@ public class TransactionID
             {
                 index++;
          
-                /*For loop that does not store tokens to String variables for
-                zero-knowledge customer information.*/
+                /*For loop that does not store tokens to String variables for a
+                zero-knowledge customer account program.*/
                 /*for(int token = 0; token < 9; token++)
                 {
                     read.next();
