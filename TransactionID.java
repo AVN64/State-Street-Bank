@@ -114,10 +114,11 @@ public class TransactionID
                 //transID[index] = getTransactionID();
 
                 String transID = getTransactionID();
-                System.out.printf("%-3d %-35s %s%n", index, company, transID);
+                /*System.out.printf("%-3d %-24s %-35s %-15s %-15s %s%n",
+                 index, account, company, firstName, lastName, transID);*/
 
                 //Prints transaction ID's without the stored String variables.
-                //System.out.printf("%-3d %s%n", index, transID);
+                System.out.printf("%-3d %s%n", index, transID);
             }
         } 
         catch (Exception e)
