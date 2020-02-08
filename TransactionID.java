@@ -15,7 +15,7 @@ public class TransactionID
 
     //CSV file to read.
     //final private String filePath = "customers.csv";
-    private String filePath;
+    final private String filePath;
 
     //Nine tokens to collect from csv file. Instance variables(fields).
     private String account = "";
@@ -39,12 +39,10 @@ public class TransactionID
         {
             this.digits[index++] = a;
         }
-        index = 10;
         for(char b = 'A'; b <= 'Z'; b++)
         {
             this.digits[index++] = b;
         }
-        index = 36;
         for(char c = 'a'; c <= 'z'; c++)
         {
             this.digits[index++] = c;
@@ -86,7 +84,6 @@ public class TransactionID
         try {
             read = new Scanner(new File(filePath));//Opens customers.csv file
             read.useDelimiter("[,\n]");//Delimiter to parse String tokens.
-            
             read.nextLine();//Skip header of csv file.
 
             while(read.hasNext())//while loop to search customer record.
