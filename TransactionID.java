@@ -10,7 +10,7 @@ public class TransactionID
     //Initialize char array of 62 elements.
     final private char[] digits = new char[62];
 
-    //Initialize Scanner class object.
+    //Initialize Scanner class object to read csv file.
     private Scanner read;
 
     //CSV file to read.
@@ -28,7 +28,7 @@ public class TransactionID
     private String state = "";
     private String zipCode = "";
 
-    //A no-argument constructor.
+    //A one argument constructor.
     public TransactionID(String filePath)
     {
         this.filePath = filePath;
@@ -78,11 +78,13 @@ public class TransactionID
     //Void method to assign all customer records a transaction ID.
     public void readRecord()
     //public void readRecord(String filePath)
+    //public String[] readRecord()
     {
         int index = 0;//Count number of customers.
+        //String[] transID = new String[469];
 
         try {
-            read = new Scanner(new File(filePath));//Opens customer.csv file
+            read = new Scanner(new File(filePath));//Opens customers.csv file
             read.useDelimiter("[,\n]");//Delimiter to parse String tokens.
             
             read.nextLine();//Skip header of csv file.
@@ -90,7 +92,14 @@ public class TransactionID
             while(read.hasNext())//while loop to search customer record.
             {
                 index++;
-
+         
+                /*For loop that does not store tokens to String variables for
+                zero-knowledge customer information.*/
+                /*for(int token = 0; token < 9; token++)
+                {
+                    read.next();
+                }*/
+                
                 account = read.next();
                 company = read.next();
                 firstName = read.next();
@@ -101,8 +110,14 @@ public class TransactionID
                 state = read.next();
                 zipCode = read.next();
 
+                //Stores transaction ID's into String array.
+                //transID[index] = getTransactionID();
+
                 String transID = getTransactionID();
                 System.out.printf("%-3d %-35s %s%n", index, company, transID);
+
+                //Prints transaction ID's without the stored String variables.
+                //System.out.printf("%-3d %s%n", index, transID);
             }
         } 
         catch (Exception e)
@@ -113,5 +128,7 @@ public class TransactionID
         {
             read.close();
         }
-    }
+        //Returns String array containing transaction ID's.
+        //return transID;
+    }//End of readRecord method
 }//End of TransacationID class.
