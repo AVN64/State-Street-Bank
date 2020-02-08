@@ -1,5 +1,6 @@
-/*Bank application that generates a random transaction ID for an account ID entered by
-the user*/
+/*Programmed by Group 2 of CSCI 362
+Bank application that generates a random transaction ID for an account ID entered by
+the user. Calls TransactionID class object to recieve random transaction ID.*/
 import java.io.File;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
@@ -13,7 +14,11 @@ public class StateStreetBank
     {
         String filePath = "customers.csv";
         input = new Scanner(System.in);//Input for command-line interface.
-        //String searchTerm = "4749464064613eb3feaadc";
+        //System.out.println("Please enter account ID: ");
+        //String searchTerm = input.nextLine();
+
+        //Example account ID's.
+        //4749464064613eb3feaadc
         //88042877140228e4355aed
 
         //GUI version of input.
