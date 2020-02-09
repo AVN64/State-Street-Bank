@@ -1,5 +1,5 @@
 /*State Street Bank transaction ID generator test class programmed by Group 2 of CSCI 362 
-This test class is to used create TransactionID class object to call methods to
+This test class is used to create TransactionID class object to call methods to
 generate a 24-digit randomized transaction ID.*/
 public class TransactionTest
 {
