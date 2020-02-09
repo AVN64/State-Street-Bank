@@ -2,7 +2,9 @@
 This Java class is to be used by a separate test class to create a random 
 24-digit transaction ID for a customer account.*/
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileNotFoundException;
+import java.io.LineNumberReader;
 import java.util.Scanner;//Scanner class used for reading csv file.
 
 public class TransactionID
@@ -12,6 +14,10 @@ public class TransactionID
 
     //Initialize Scanner class object to read csv file.
     private Scanner read;
+
+    //Initialize FileReader and LineNumberReader classes to count lines in csv file.
+    private FileReader fr;
+    private LineNumberReader lnr;
 
     //CSV file to read.
     //final private String filePath = "customers.csv";
@@ -73,13 +79,37 @@ public class TransactionID
         return result.toString();//Returns toString method of StringBuilder class object.
     }
 
+    //Accessor method to count lines in csv file and assign transID array element size.
+    public int getLineNumber()
+    {
+        int lines = 0;
+        try{ 		
+    		fr = new FileReader(new File(filePath));
+    		lnr = new LineNumberReader(fr);
+    		    
+                while (lnr.readLine() != null)
+                {
+    	        	lines++;
+    	        }   	 
+    	        //System.out.println("Number of lines : " + lines);
+                lnr.close();//Close LineNumberReader object.                   		     
+        }
+        catch(Exception e)
+        {
+    		e.printStackTrace();
+        }
+        return lines;//Includes header line to prevent off-by-one error.
+    }//End of getLineNumber method
+
     //Void method to assign all customer records a transaction ID.
-    public void readRecord()
+    //public void readRecord()
     //public void readRecord(String filePath)
-    //public String[] readRecord()
+    public String[] readRecord()
     {
         int index = 0;//Count number of customers.
-        //String[] transID = new String[469];
+
+        //String array to store transaction ID's with size determined by number of customers.
+        final String[] transID = new String[getLineNumber()];
 
         try {
             read = new Scanner(new File(filePath));//Opens customers.csv file
@@ -108,25 +138,28 @@ public class TransactionID
                 zipCode = read.next();
 
                 //Stores transaction ID's into String array.
-                //transID[index] = getTransactionID();
+                transID[index] = getTransactionID();
 
-                String transID = getTransactionID();
+                //Stores one transaction ID per loop.
+                //String transID = getTransactionID();
+
+                //Prints transaction ID's with Account information.
                 /*System.out.printf("%-3d %-24s %-35s %-15s %-15s %s%n",
                  index, account, company, firstName, lastName, transID);*/
 
                 //Prints transaction ID's without the stored String variables.
-                System.out.printf("%-3d %s%n", index, transID);
+                //System.out.printf("%-3d %s%n", index, transID);
             }
         } 
         catch (Exception e)
         {
-            System.out.println("Error.");
+            e.printStackTrace();
         }
         finally
         {
-            read.close();
+            read.close();//Close Scanner class object.
         }
         //Returns String array containing transaction ID's.
-        //return transID;
-    }//End of readRecord method
+        return transID;
+    }//End of readRecord method.
 }//End of TransacationID class.
