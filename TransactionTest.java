@@ -7,8 +7,8 @@ public class TransactionTest
     {
         long startTime = System.currentTimeMillis();//Runtime benchmark in milliseconds.
 
-        //Declare TransactionID class object and input csv filename.
-        TransactionID t1 = new TransactionID("customers.csv");
+        //Declare TransactionID class object and input command-line argument filename.
+        TransactionID t1 = new TransactionID(args[0]);
         
         //If this method is void.
         //t1.readRecord();
