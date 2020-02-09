@@ -87,12 +87,12 @@ public class TransactionID
     		fr = new FileReader(new File(filePath));
     		lnr = new LineNumberReader(fr);
     		    
-                while (lnr.readLine() != null)
-                {
-    	        	lines++;
-    	        }   	 
-    	        //System.out.println("Number of lines : " + lines);
-                lnr.close();//Close LineNumberReader object.                   		     
+            while (lnr.readLine() != null)
+            {
+    	        lines++;
+    	    }   	 
+    	    //System.out.println("Number of lines : " + lines);
+            lnr.close();//Close LineNumberReader object.                   		     
         }
         catch(Exception e)
         {
