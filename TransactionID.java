@@ -86,13 +86,10 @@ public class TransactionID
         try{ 		
     		fr = new FileReader(new File(filePath));
     		lnr = new LineNumberReader(fr);
-    		    
-            while (lnr.readLine() != null)
-            {
-    	        lines++;
-    	    }   	 
-    	    //System.out.println("Number of lines : " + lines);
-            lnr.close();//Close LineNumberReader object.                   		     
+            
+            lnr.skip(Long.MAX_VALUE);//Instead of using while loop, skip to last line.
+            lines = lnr.getLineNumber() + 1;//+1 because line index starts at 0 
+            lnr.close();//Close LineNumberReader class object.                   		     
         }
         catch(Exception e)
         {
