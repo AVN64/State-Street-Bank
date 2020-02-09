@@ -2,6 +2,7 @@
 Bank application that generates a random transaction ID for an account ID entered by
 the user. Calls TransactionID class object to recieve random transaction ID.*/
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 
@@ -11,9 +12,10 @@ public class StateStreetBank
     private static Scanner input;//Scanner class object for command-line input.
 
     public static void main(String[] args)
-    {
-        String filePath = "customers.csv";
+    {   
         input = new Scanner(System.in);//Input for command-line interface.
+        //System.out.println("Please enter filename of database: ");
+        //String filePath = input.nextLine();
         //System.out.println("Please enter account ID: ");
         //String searchTerm = input.nextLine();
 
@@ -22,6 +24,10 @@ public class StateStreetBank
         //88042877140228e4355aed
 
         //GUI version of input.
+        String filePath = JOptionPane.showInputDialog(null, 
+        "Please enter filename of database: ", "State Street Bank", 
+        JOptionPane.INFORMATION_MESSAGE);
+
         String searchTerm = JOptionPane.showInputDialog(null, 
         "Please enter account ID: ", "State Street Bank", 
         JOptionPane.INFORMATION_MESSAGE);
@@ -80,12 +86,15 @@ public class StateStreetBank
             }
             else
             {
-                JOptionPane.showMessageDialog(null, "Invalid Account ID.");
+                JOptionPane.showMessageDialog(null, "Invalid Account ID.",
+                 "State Street Bank", JOptionPane.ERROR_MESSAGE);
             }  
         } 
         catch (Exception e) {
 
-            System.out.println("Error");
+            JOptionPane.showMessageDialog(null, "File not found.", "State Street Bank",
+            JOptionPane.ERROR_MESSAGE);
+            //System.out.println("File not found.");
         }
     }
 
