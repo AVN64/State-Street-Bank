@@ -19,10 +19,6 @@ public class StateStreetBank
         //System.out.println("Please enter account ID: ");
         //String searchTerm = input.nextLine();
 
-        //Example account ID's.
-        //4749464064613eb3feaadc
-        //88042877140228e4355aed
-
         //GUI version of input.
         String filePath = JOptionPane.showInputDialog(null, 
         "Please enter filename of database: ", "State Street Bank", 
@@ -33,13 +29,21 @@ public class StateStreetBank
         JOptionPane.INFORMATION_MESSAGE);
         searchTerm = searchTerm.toLowerCase();
 
-        readRecord(searchTerm, filePath);//Call method to obtain transaction ID.
+        //Call method to obtain transaction ID.
+        String transID = getRecord(searchTerm, filePath);
+        JOptionPane.showMessageDialog(null,"Transaction ID: " + transID);
+
+        //System.out.println(transID);
     }
 
-    //Void method to read and search records in a csv file using Scanner class object.
-    public static void readRecord(String searchTerm, String filePath)
+    //Method to read and search records in a csv file using Scanner class object.
+    public static String getRecord(String searchTerm, String filePath)
     {
+        //Initialize TransactionID class object.
+        TransactionID t1 = new TransactionID(filePath);
+
         boolean found = false;//Boolean value to determine correct account ID.
+        String transID = null;
 
         //Nine attributes of a customer record.
         String account = "";
@@ -53,7 +57,7 @@ public class StateStreetBank
         String zipCode = "";
 
         try {
-            read = new Scanner(new File(filePath));//Opens customer.csv file
+            read = new Scanner(new File(filePath));//Opens customer.csv file.
             read.useDelimiter("[,\n]");//Delimiter to parse String tokens.
 
             while(read.hasNext() && !found)//while loop to search customer records.
@@ -76,13 +80,8 @@ public class StateStreetBank
             //Conditional statement where valid account ID recieves transaction ID.
             if(found)
             {
-                //String transID = transaction();
-                String transID = transaction(filePath);
-                /*JOptionPane.showMessageDialog(null,"Account: " + account + "\nCompany: " +
-                company + "\nFirst Name: " + firstName + "\nLast Name: " + lastName + 
-                "\nAddress 1: " + address1 + "\nAddress 2: " + address2 + "\nCity: " +
-                city + "\nState: " + state + "\nZIP Code: " + zipCode);*/
-                JOptionPane.showMessageDialog(null,"Transaction ID: " + transID);
+                //Calls method from TransactionID class to obtain transaction ID.
+                transID = t1.getTransactionID();
             }
             else
             {
@@ -91,19 +90,11 @@ public class StateStreetBank
             }  
         } 
         catch (Exception e) {
-
+            //Displays if csv file is not found or typed correctly.
             JOptionPane.showMessageDialog(null, "File not found.", "State Street Bank",
             JOptionPane.ERROR_MESSAGE);
             //System.out.println("File not found.");
         }
-    }
-
-    //Accessor method to use Transaction ID class object to generate transaction ID.
-    //public static String transaction()
-    public static String transaction(String filePath)
-    {
-        TransactionID t1 = new TransactionID(filePath);//Declare TransactionID class object.
-        String transID = t1.getTransactionID();//Assign transaction ID to String variable.
-        return transID;
-    }
-}
+        return transID;//Send transaction ID to main method.
+    }//End of getRecord method.
+}//End of StateStreetBank class.
