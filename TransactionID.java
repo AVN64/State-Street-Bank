@@ -1,11 +1,10 @@
 /*State Street Bank transaction ID generator programmed by Group 2 of CSCI 362 
 This Java class is to be used by a separate test class to create a random 
 24-digit transaction ID for a customer account.*/
-import java.io.File;
-import java.io.FileReader;//Class used with LineNumberReader.
+import java.io.FileReader;//Class used with LineNumberReader and Scanner classes.
 import java.io.FileNotFoundException;
 import java.io.LineNumberReader;
-import java.util.Scanner;//Scanner class used for reading csv file.
+import java.util.Scanner;//Scanner class used for reading and parsing csv file.
 
 public class TransactionID
 {
@@ -84,7 +83,7 @@ public class TransactionID
         try{ 		
             lnr = new LineNumberReader(new FileReader(filePath));
             
-            lnr.skip(Long.MAX_VALUE);//Instead of using while loop, skip to last line.
+            lnr.skip(Long.MAX_VALUE);//Instead of using while loop, skip to the last line.
             lines = lnr.getLineNumber() + 1;//+1 because line index starts at 0 
             lnr.close();//Close LineNumberReader class object.                   		     
         }
@@ -106,7 +105,7 @@ public class TransactionID
         final String[] transID = new String[getLineNumber()];
 
         try {
-            read = new Scanner(new File(filePath));//Opens customers.csv file
+            read = new Scanner(new FileReader(filePath));//Opens customers.csv file
             read.useDelimiter("[,\n]");//Delimiter to parse String tokens.
             read.nextLine();//Skip header of csv file.
 
@@ -139,7 +138,7 @@ public class TransactionID
 
                 //Prints transaction ID's with Account information.
                 /*System.out.printf("%-3d %-24s %-35s %-15s %-15s %s%n",
-                 index, account, company, firstName, lastName, transID);*/
+                 index, account, company, firstName, lastName, transID[index]);*/
 
                 //Prints transaction ID's without the stored String variables.
                 //System.out.printf("%-3d %s%n", index, transID);
