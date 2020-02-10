@@ -2,7 +2,7 @@
 This Java class is to be used by a separate test class to create a random 
 24-digit transaction ID for a customer account.*/
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileReader;//Class used with LineNumberReader.
 import java.io.FileNotFoundException;
 import java.io.LineNumberReader;
 import java.util.Scanner;//Scanner class used for reading csv file.
@@ -15,13 +15,11 @@ public class TransactionID
     //Initialize Scanner class object to read csv file.
     private Scanner read;
 
-    //Initialize FileReader and LineNumberReader classes to count lines in csv file.
-    private FileReader fr;
+    //Initialize LineNumberReader class object to count lines in csv file.
     private LineNumberReader lnr;
 
     //CSV file to read.
-    //final private String filePath = "customers.csv";
-    final private String filePath;
+    final private String filePath;// = "customers.csv";
 
     //Nine tokens to collect from csv file. Instance variables(fields).
     private String account = "";
@@ -39,7 +37,7 @@ public class TransactionID
     {
         this.filePath = filePath;
 
-        //Three for loops to populate array with alphanumeric characters.
+        //Three for loops to populate digits array with alphanumeric characters.
         int index = 0;
         for(char a = '0'; a <= '9'; a++)
         {
@@ -80,12 +78,11 @@ public class TransactionID
     }
 
     //Accessor method to count lines in csv file and assign transID array element size.
-    public int getLineNumber()
+    public int getLineNumber()//Method overloading with LineNumberReader class.
     {
         int lines = 0;
         try{ 		
-    		fr = new FileReader(new File(filePath));
-    		lnr = new LineNumberReader(fr);
+            lnr = new LineNumberReader(new FileReader(filePath));
             
             lnr.skip(Long.MAX_VALUE);//Instead of using while loop, skip to last line.
             lines = lnr.getLineNumber() + 1;//+1 because line index starts at 0 
@@ -98,7 +95,7 @@ public class TransactionID
         return lines;//Includes header line to prevent off-by-one error.
     }//End of getLineNumber method
 
-    //Void method to assign all customer records a transaction ID.
+    //Method to assign all customer records a transaction ID by reading csv file.
     //public void readRecord()
     //public void readRecord(String filePath)
     public String[] readRecord()
