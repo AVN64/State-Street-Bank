@@ -20,17 +20,6 @@ public class TransactionID
     //CSV file to read.
     final private String filePath;// = "customers.csv";
 
-    //Nine tokens to collect from csv file. Instance variables(fields).
-    private String account = "";
-    private String company = "";
-    private String firstName = "";
-    private String lastName = "";
-    private String address1 = "";
-    private String address2 = "";
-    private String city = "";
-    private String state = "";
-    private String zipCode = "";
-
     //A one argument constructor.
     public TransactionID(String filePath)
     {
@@ -95,14 +84,13 @@ public class TransactionID
     }//End of getLineNumber method
 
     //Method to assign all customer records a transaction ID by reading csv file.
-    //public void readRecord()
-    //public void readRecord(String filePath)
-    public String[] readRecord()
+    public String[][] readRecord()
     {
         int index = 0;//Count number of customers.
 
         //String array to store transaction ID's with size determined by number of customers.
-        final String[] transID = new String[getLineNumber()];
+        //final String[] transID = new String[getLineNumber()];//1D Array. 
+        final String[][] customer = new String[getLineNumber()][10];
 
         try {
             read = new Scanner(new FileReader(filePath));//Opens customers.csv file
@@ -112,36 +100,27 @@ public class TransactionID
             while(read.hasNext())//while loop to search customer record.
             {
                 index++;
-         
+
                 /*For loop that does not store tokens to String variables for a
                 zero-knowledge customer account program.*/
                 /*for(int token = 0; token < 9; token++)
                 {
                     read.next();
                 }*/
+                //String transID[index] = getTransactionID();
                 
-                account = read.next();
-                company = read.next();
-                firstName = read.next();
-                lastName = read.next();
-                address1 = read.next();
-                address2 = read.next();
-                city = read.next();
-                state = read.next();
-                zipCode = read.next();
+                customer[index][0] = read.next();//Account ID.
+                customer[index][1] = read.next();//Company.
+                customer[index][2] = read.next();//Firstname.
+                customer[index][3] = read.next();//Lastname.
+                customer[index][4] = read.next();//Address 1.
+                customer[index][5] = read.next();//Address 2.
+                customer[index][6] = read.next();//City.
+                customer[index][7] = read.next();//State.
+                customer[index][8] = read.next();//ZIP Code.
 
-                //Stores transaction ID's into String array.
-                transID[index] = getTransactionID();
-
-                //Stores one transaction ID per loop.
-                //String transID = getTransactionID();
-
-                //Prints transaction ID's with Account information.
-                /*System.out.printf("%-3d %-24s %-35s %-15s %-15s %s%n",
-                 index, account, company, firstName, lastName, transID[index]);*/
-
-                //Prints transaction ID's without the stored String variables.
-                //System.out.printf("%-3d %s%n", index, transID);
+                //Stores transaction ID's into 10 column of 2D String array.
+                customer[index][9] = getTransactionID();             
             }
         } 
         catch (Exception e)
@@ -152,7 +131,8 @@ public class TransactionID
         {
             read.close();//Close Scanner class object.
         }
-        //Returns String array containing transaction ID's.
-        return transID;
+        //Returns 2D String array containing transaction ID's.
+        //return transID;
+        return customer;
     }//End of readRecord method.
 }//End of TransacationID class.
