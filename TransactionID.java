@@ -119,7 +119,7 @@ public class TransactionID
                 customer[index][7] = read.next();//State.
                 customer[index][8] = read.next();//ZIP Code.
 
-                //Stores transaction ID's into 10 column of 2D String array.
+                //Stores transaction ID's into 10th column of 2D String array.
                 customer[index][9] = getTransactionID();             
             }
         } 
