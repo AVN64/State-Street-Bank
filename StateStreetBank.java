@@ -13,17 +13,31 @@ public class StateStreetBank
 
     public static void main(String[] args)
     {   
-        input = new Scanner(System.in);//Input for command-line interface.
-        //System.out.println("Please enter filename of database: ");
-        //String filePath = input.nextLine();
+        //GUI version of input.
+        String filePath = null;
+        try {
+            input = new Scanner(System.in);//Input for command-line interface.
+            //System.out.println("Please enter filename of database: ");
+            //filePath = input.nextLine();
+
+            filePath = JOptionPane.showInputDialog(null, 
+            "Please enter filename of database: ", "State Street Bank", 
+            JOptionPane.INFORMATION_MESSAGE);
+
+            read = new Scanner(new File(filePath));
+        } 
+        catch (Exception e)
+        {
+            //Displays if csv file is not found or typed correctly.
+            JOptionPane.showMessageDialog(null, "File not found.", "State Street Bank",
+            JOptionPane.ERROR_MESSAGE);
+            //System.out.println("File not found.");
+            System.exit(0);
+        }
+
         //System.out.println("Please enter account ID: ");
         //String searchTerm = input.nextLine();
-
-        //GUI version of input.
-        String filePath = JOptionPane.showInputDialog(null, 
-        "Please enter filename of database: ", "State Street Bank", 
-        JOptionPane.INFORMATION_MESSAGE);
-
+        
         String searchTerm = JOptionPane.showInputDialog(null, 
         "Please enter account ID: ", "State Street Bank", 
         JOptionPane.INFORMATION_MESSAGE);
@@ -38,6 +52,34 @@ public class StateStreetBank
 
     //Method to read and search records in a csv file using Scanner class object.
     public static String getRecord(String searchTerm, String filePath)
+    {
+        //Initialize TransactionID class object.
+        TransactionID t1 = new TransactionID(filePath);
+
+        String[][] customer = t1.readRecord();
+        String transID = "";
+        String account = "";
+
+        for(int index = 1; index < customer.length; index++)
+        {
+            account = customer[index][0];
+            if(account.equals(searchTerm))
+            {
+                //Calls method from TransactionID class to obtain transaction ID.
+                transID = customer[index][9];
+                break;
+            }
+            else
+            {
+                transID = "Invalid Account ID.";
+            }
+        }
+        return transID;
+    }//End of getRecord method.
+
+    /*************************** Alternative Method ******************************/
+    //Method to read and search records in a csv file using Scanner class object.
+    /*public static String getRecord(String searchTerm, String filePath)
     {
         //Initialize TransactionID class object.
         TransactionID t1 = new TransactionID(filePath);
@@ -96,5 +138,5 @@ public class StateStreetBank
             //System.out.println("File not found.");
         }
         return transID;//Send transaction ID to main method.
-    }//End of getRecord method.
+    }//End of getRecord method.*/
 }//End of StateStreetBank class.
