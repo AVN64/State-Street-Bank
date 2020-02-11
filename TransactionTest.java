@@ -18,15 +18,16 @@ public class TransactionTest
             System.out.printf("%-3d %s%n", index, contents);
         }*/
  
-        /*for(String[] contents: t1.readRecord())//Print customer information.
+        //Print transaction ID's and customer information.
+        String divide = "-";
+        /*for(String[] contents: t1.readRecord())
         {
             index++;
-            System.out.printf("Customer #%d%n", index);
+            System.out.printf("%s%nCustomer #%d%n", divide.repeat(30),index);
             for(String i: contents)
             {
                 System.out.printf("%s%n", i);
             }
-            System.out.println();
         }*/
 
         //Print transaction ID's without customer information.
@@ -34,10 +35,6 @@ public class TransactionTest
         for(int i = 0; i < contents.length; i++)
         {
             index++;//Includes header line to prevent off-by-one error.
-            for(int j = 0; j < contents[i].length; j++)
-            {
-        
-            }
             System.out.printf("%-3d %s%n", index, contents[i][9]);     
         }
 
