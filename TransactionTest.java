@@ -3,7 +3,7 @@ This test class is used to create TransactionID class object to call methods to
 generate a 24-digit randomized transaction ID for a customer account.*/
 public class TransactionTest
 {
-    public static void main(String[] args)
+    public static void main(String[] args)//Enter csv filename before executing program.
     {
         long startTime = System.currentTimeMillis();//Runtime benchmark in milliseconds.
 
