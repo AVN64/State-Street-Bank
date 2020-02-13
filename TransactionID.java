@@ -90,7 +90,7 @@ public class TransactionID
 
         //String array to store transaction ID's with size determined by number of customers.
         //final String[] transID = new String[getLineNumber()];//1D Array. 
-        final String[][] customer = new String[getLineNumber()][10];
+        String[][] customer = new String[getLineNumber()][10];
 
         try {
             read = new Scanner(new FileReader(filePath));//Opens customers.csv file
@@ -109,15 +109,19 @@ public class TransactionID
                 }*/
                 //String transID[index] = getTransactionID();
                 
-                customer[index][0] = read.next();//Account ID.
-                customer[index][1] = read.next();//Company.
-                customer[index][2] = read.next();//Firstname.
-                customer[index][3] = read.next();//Lastname.
-                customer[index][4] = read.next();//Address 1.
-                customer[index][5] = read.next();//Address 2.
-                customer[index][6] = read.next();//City.
-                customer[index][7] = read.next();//State.
-                customer[index][8] = read.next();//ZIP Code.
+                for(int token = 0; token < 9; token++)//For loop of customer attributes.
+                {
+                    customer[index][token] = read.next();
+                    /*token 0 = Account ID.
+                    token 1 = Company.
+                    token 2 = Firstname.
+                    token 3 = Lastname.
+                    token 4 = Address 1.
+                    token 5 = Address 2.
+                    token 6 = City.
+                    token 7 = State.
+                    token 8 = ZIP Code.*/
+                }
 
                 //Stores transaction ID's into 10th column of 2D String array.
                 customer[index][9] = getTransactionID();             
@@ -131,8 +135,29 @@ public class TransactionID
         {
             read.close();//Close Scanner class object.
         }
+
+        //Call method to check for duplicate transaction ID's.
+        customer = duplicateCheck(customer);
         //Returns 2D String array containing transaction ID's.
         //return transID;
         return customer;
     }//End of readRecord method.
+
+    //Method to check and replace duplicate transaction ID's.
+    public String[][] duplicateCheck(String[][] customer)
+    {
+        for(int i = 1; i < customer.length; i++)//i set to 1 to skip null header.
+        {
+            for(int j = i + 1 ; j < customer[i].length; j++)
+            {
+                if(customer[i][9].equals(customer[j][9]))
+                {
+                    //Reassign transaction ID if duplicate is found.
+                    System.out.println("Duplicate transaction ID detected. Replacing...");
+                    customer[i][9] = getTransactionID();
+                }
+            }
+        }
+        return customer;
+    }//End of duplicateCheck method.
 }//End of TransacationID class.
