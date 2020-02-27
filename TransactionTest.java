@@ -7,8 +7,8 @@ public class TransactionTest
     {
         long startTime = System.currentTimeMillis();//Runtime benchmark in milliseconds.
 
-        //Declare TransactionID class object and input command-line argument filename.
-        TransactionID t1 = new TransactionID(args[0]);
+        //Declare TransactionID class object t1.
+        TransactionID t1 = new TransactionID();
 
         //Enhanced for loop to collect contents of customer array from TransactionID class.
         int index = 0;

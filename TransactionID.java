@@ -18,13 +18,11 @@ public class TransactionID
     private LineNumberReader lnr;
 
     //CSV file to read.
-    final private String filePath;// = "customers.csv";
+    final private String filePath = "customers.csv";
 
-    //A one argument constructor.
-    public TransactionID(String filePath)
+    //A no argument constructor.
+    public TransactionID()
     {
-        this.filePath = filePath;
-
         //Three for loops to populate digits array with alphanumeric characters.
         int index = 0;
         for(char a = '0'; a <= '9'; a++)
@@ -65,7 +63,7 @@ public class TransactionID
         return result.toString();//Returns toString method of StringBuilder class object.
     }
 
-    //Accessor method to count lines in csv file and assign transID array element size.
+    //Accessor method to count lines in a csv file and assign customer array row size.
     public int getLineNumber()//Method overloading with LineNumberReader class.
     {
         int lines = 0;
@@ -78,10 +76,11 @@ public class TransactionID
         }
         catch(Exception e)
         {
+            System.err.println("File opening failed.");
     		e.printStackTrace();
         }
         return lines;//Includes header line to prevent off-by-one error.
-    }//End of getLineNumber method
+    }//End of getLineNumber method.
 
     //Method to assign all customer records a transaction ID by reading csv file.
     public String[][] readRecord()
