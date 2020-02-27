@@ -4,7 +4,7 @@ public class DuplicateTest
     {
         long startTime = System.currentTimeMillis();
 
-        TransactionID t1 = new TransactionID("customers.csv");//Declare TransactionID class object.
+        TransactionID t1 = new TransactionID();//Declare TransactionID class object.
         final String[] transID = new String[200000];//Initialize String array.
 
         for(int i = 0; i < transID.length; i++)
