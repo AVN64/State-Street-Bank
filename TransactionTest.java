@@ -9,7 +9,7 @@ Customer class, and user input for TransactionTest class.*/
 
 public class TransactionTest
 {
-    public static void main(String[] args)//Enter csv filename before executing program.
+    public static void main(String[] args)
     {
         //Initialize Customer class object c1.
         final Customer c1 = new Customer();
@@ -17,10 +17,11 @@ public class TransactionTest
         //Initialize Scanner class object for command-line user input.
         Scanner input = new Scanner(System.in);
         System.out.print("Enter 1 for transaction ID's to all customers.\n" +
-        "Enter 2 for one transaction ID for specific account ID.\n");
+        "Enter 2 for one transaction ID to a specific account ID.\n");
         int option = input.nextInt();
 
-        //Print transaction ID's without customer information.
+        /*Print transaction ID's without customer information from 2D array obtained.
+        by calling method1 of Customer class.*/
         if(option == 1)
         {
             String[][] contents = c1.method1();
@@ -48,12 +49,12 @@ public class TransactionTest
             String transID;
             do{	
                 System.out.print("Please enter account ID: ");
-                String searchTerm = input.nextLine();
+                String accountID = input.nextLine();
 
-                searchTerm = searchTerm.toLowerCase();
+                accountID = accountID.toLowerCase();
 
                 //Call Method2 to obtain single transaction ID.
-                transID = c1.method2(searchTerm);
+                transID = c1.method2(accountID);
             
                 if(transID.equals("Invalid."))//When incorrect account ID is typed.
 	            {
@@ -77,7 +78,7 @@ public class TransactionTest
     }//End of main method.
 }//End of TransactionTest class.
 
-//Class used to generate a 24-digit alphanumeric TransactionID
+//Class used to generate a 24-digit alphanumeric TransactionID.
 class TransactionID
 {
     //Initialize char array of 62 elements.
@@ -127,6 +128,8 @@ class TransactionID
     }
 }//End of TransactionID class.
 
+/*Class used to read customers.csv file and assign transaction ID's to customers
+listed in the database to be stored in a 2D array.*/
 class Customer
 {
     //Initialize Scanner class object to read csv file.
@@ -215,7 +218,7 @@ class Customer
         customer = duplicateCheck(customer);
         //Returns 2D String array containing transaction ID's.
         return customer;
-    }//End of Method1 method.
+    }//End of method1 method.
 
     public String[][] readRecord()
     {
@@ -276,7 +279,7 @@ class Customer
             }
         }
         return transID;
-    }//End of Method2 method.
+    }//End of method2 method.
 
     //Method to check and replace duplicate transaction ID's for Method1.
     public String[][] duplicateCheck(String[][] customer)
