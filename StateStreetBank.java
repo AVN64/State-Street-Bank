@@ -13,12 +13,12 @@ public class StateStreetBank
 {
    public static void main(String[] args)
    {
-        //Initialize TransactionID class object t1.
-        TransactionID t1 = new TransactionID();
+        //Initialize Customer class object c1.
+        Customer c1 = new Customer();
 
         /*Call readRecord method from TransactionID class to obtain randomly
         generated transaction ID's for all customers in the csv file.*/
-        final String[][] customer = t1.readRecord();
+        final String[][] customer = c1.method1();
 
         DefaultListModel<String> lModel = new DefaultListModel<>();
         JList<String> transactionList = new JList<>(lModel);
