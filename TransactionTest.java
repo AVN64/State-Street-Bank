@@ -1,5 +1,5 @@
 /*State Street Bank transaction ID generator programmed by Group 2 of CSCI 362 
-This Java program is used to create random 24-digit transaction ID's for customer 
+This Java program is used to create random 24-digit transaction IDs for customer 
 accounts in a database read from a csv file.*/
 import java.io.FileReader;//Class used with LineNumberReader and Scanner classes.
 import java.io.FileNotFoundException;
@@ -16,22 +16,23 @@ public class TransactionTest
 
         //Initialize Scanner class object for command-line user input.
         Scanner input = new Scanner(System.in);
-        System.out.print("Enter 1 for transaction ID's to all customers.\n" +
+        System.out.print("Enter 1 for transaction IDs to all customers.\n" +
         "Enter 2 for one transaction ID to a specific account ID.\n");
         int option = input.nextInt();
+        input.skip("\n");
 
-        /*Print transaction ID's without customer information from 2D array obtained.
+        /*Print transaction IDs without customer information from 2D array obtained.
         by calling method1 of Customer class.*/
         if(option == 1)
         {
             String[][] contents = c1.method1();
             for(int i = 0; i < contents.length; i++)
             {
-                /*Print transaction ID's for customers.csv file. Index number is
+                /*Print transaction IDs for customers.csv file. Index number is
                 preconditioned to +1 to prevent off-by-one error.*/
                 System.out.printf("%-3d %s%n", i + 1, contents[i][9]);           
             }
-            //Print transaction ID's and customer information.
+            //Print transaction IDs and customer information.
             String divide = "-";
             /*for(String[] contents: t1.readRecord())
             {
@@ -69,6 +70,7 @@ public class TransactionTest
             }while(transID.equals("Invalid."));
         
             System.out.println(transID);
+            input.close();
         }
         else
         {
@@ -128,7 +130,7 @@ class TransactionID
     }
 }//End of TransactionID class.
 
-/*Class used to read customers.csv file and assign transaction ID's to customers
+/*Class used to read customers.csv file and assign transaction IDs to customers
 listed in the database to be stored in a 2D array.*/
 class Customer
 {
@@ -141,7 +143,7 @@ class Customer
     //CSV file to read.
     final private String filePath = "customers.csv";
 
-    /*Initialize TransactionID class object to generate transaction ID's for
+    /*Initialize TransactionID class object to generate transaction IDs for
     methods of Customer class.*/
     final private TransactionID t1 = new TransactionID();
 
@@ -171,11 +173,11 @@ class Customer
     }//End of getLineNumber method.
 
     //Method to assign all customer records a transaction ID by reading csv file.
-    public String[][] method1()
+    public String[][] readRecord()
     {
         int index = 0;//Count number of customers.
 
-        //2D String array to store transaction ID's with size determined by number of customers.
+        //2D String array to store transaction IDs with size determined by number of customers.
         String[][] customer = new String[getLineNumber()][10];
 
         try {
@@ -199,10 +201,7 @@ class Customer
                     token 6 = City.
                     token 7 = State.
                     token 8 = ZIP Code.*/
-                }
-
-                //Stores transaction ID's into 10th column of 2D String array.
-                customer[index][9] = t1.getTransID();             
+                }                            
             }
         } 
         catch (Exception e)
@@ -213,54 +212,23 @@ class Customer
         {
             read.close();//Close Scanner class object.
         }
-
-        //Call method to check for duplicate transaction ID's.
-        customer = duplicateCheck(customer);
-        //Returns 2D String array containing transaction ID's.
+        //Returns 2D String array containing customer records.
         return customer;
-    }//End of method1 method.
-
-    public String[][] readRecord()
-    {
-        int index = 0;//Count number of customers.
-
-        //2D String array to store transaction ID's with size determined by number of customers.
-        String[][] customer = new String[getLineNumber()][9];
-
-        try {
-            read = new Scanner(new FileReader(filePath));//Opens customers.csv file
-            read.useDelimiter("[,\n]");//Delimiter to parse String tokens.
-            read.nextLine();//Skip header of csv file.
-
-            while(read.hasNext())//while loop to search customer record.
-            {
-                index++;          
-                for(int token = 0; token < 9; token++)//For loop of customer attributes.
-                {
-                    customer[index][token] = read.next();
-                    /*token 0 = Account ID.
-                    token 1 = Company.
-                    token 2 = Firstname.
-                    token 3 = Lastname.
-                    token 4 = Address 1.
-                    token 5 = Address 2.
-                    token 6 = City.
-                    token 7 = State.
-                    token 8 = ZIP Code.*/
-                }                      
-            }
-        } 
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-        finally
-        {
-            read.close();//Close Scanner class object.
-        }
-        return customer;
-
     }//End of readRecord method.
+
+    public String[][] method1()
+    {
+        String[][] account = readRecord();
+        for(int index = 1; index < account.length; index++)
+        {
+            //Stores transaction ID's into 10th column of 2D String array.
+            account[index][9] = t1.getTransID();
+        }
+        //Call method to check for duplicate transaction IDs.
+        account = duplicateCheck(account);
+        //Returns 2D String array containing customer records with transaction IDs.
+        return account;
+    }
 
     public String method2(String accountID)
     {
@@ -281,11 +249,11 @@ class Customer
         return transID;
     }//End of method2 method.
 
-    //Method to check and replace duplicate transaction ID's for Method1.
+    //Method to check and replace duplicate transaction IDs for Method1.
     public String[][] duplicateCheck(String[][] customer)
     {
         /*Nested-loop algorithm to compare one assigned transaction ID from a customer
-        to all transactionID's in the database at each cycle.*/
+        to all transactionIDs in the database at each cycle.*/
         for(int i = 1; i < customer.length; i++)//i set to 1 to skip null header.
         {
             for(int j = i + 1 ; j < customer[i].length; j++)
