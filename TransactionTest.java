@@ -33,8 +33,9 @@ public class TransactionTest
                 System.out.printf("%-3d %s%n", i + 1, contents[i][9]);           
             }
             //Print transaction IDs and customer information.
-            String divide = "-";
-            /*for(String[] contents: t1.readRecord())
+            /*String divide = "-";
+            int index = 0;
+            for(String[] contents: c1.method1())
             {
                 index++;
                 System.out.printf("%s%nCustomer #%d%n", divide.repeat(30),index);
@@ -178,7 +179,7 @@ class Customer
         int index = 0;//Count number of customers.
 
         //2D String array to store transaction IDs with size determined by number of customers.
-        String[][] customer = new String[getLineNumber()][10];
+        final String[][] customer = new String[getLineNumber()][10];
 
         try {
             read = new Scanner(new FileReader(filePath));//Opens customers.csv file
