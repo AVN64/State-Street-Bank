@@ -71,7 +71,7 @@ public class TransactionTest
             }while(transID.equals("Invalid."));
         
             System.out.println(transID);
-            input.close();
+            input.close();//Close Scanner class object.
         }
         else
         {
@@ -219,7 +219,7 @@ class Customer
 
     public String[][] method1()
     {
-        String[][] account = readRecord();
+        String[][] account = readRecord();//Get database from readRecord method.
         for(int index = 1; index < account.length; index++)
         {
             //Stores transaction ID's into 10th column of 2D String array.
@@ -229,12 +229,12 @@ class Customer
         account = duplicateCheck(account);
         //Returns 2D String array containing customer records with transaction IDs.
         return account;
-    }
+    }//End of method1 method.
 
     public String method2(String accountID)
     {
         String transID = "";
-        String[][] account = readRecord();
+        String[][] account = readRecord();//Get database from readRecord method.
         for(int index = 1; index < account.length; index++)
         {
             if(account[index][0].equals(accountID))//Checks for matching account ID from query.
@@ -242,15 +242,16 @@ class Customer
                 transID = t1.getTransID();//Obtains transaction ID and ends loop.
                 break;
             }
-            else
+            else//If queried account ID does not match to any account ID in the database.
             {
                 transID = "Invalid.";
             }
         }
+        //Returns a single transaction ID to the queried customer account.
         return transID;
     }//End of method2 method.
 
-    //Method to check and replace duplicate transaction IDs for Method1.
+    //Method to check and replace duplicate transaction IDs from method1.
     public String[][] duplicateCheck(String[][] customer)
     {
         /*Nested-loop algorithm to compare one assigned transaction ID from a customer
