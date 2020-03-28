@@ -25,7 +25,7 @@ public class TransactionTest
         by calling method1 of Customer class.*/
         if(option == 1)
         {
-            String[][] contents = c1.method1();
+            String[][] contents = c1.methodOne();
             for(int i = 0; i < contents.length; i++)
             {
                 /*Print transaction IDs for customers.csv file. Index number is
@@ -56,7 +56,7 @@ public class TransactionTest
                 accountID = accountID.toLowerCase();
 
                 //Call Method2 to obtain single transaction ID.
-                transID = c1.method2(accountID);
+                transID = c1.methodTwo(accountID);
             
                 if(transID.equals("Invalid."))//When incorrect account ID is typed.
 	            {
@@ -81,7 +81,7 @@ public class TransactionTest
     }//End of main method.
 }//End of TransactionTest class.
 
-//Class used to generate a 24-digit alphanumeric TransactionID.
+//Class used to generate a 24-digit alphanumeric transaction ID.
 class TransactionID
 {
     //Initialize char array of 62 elements.
@@ -154,7 +154,7 @@ class Customer
         
     }
 
-    //Accessor method to count lines in a csv file and assign customer array row size.
+    //Accessor method to count lines in a csv file and assign customer 2D array row size.
     public int getLineNumber()//Method overloading with LineNumberReader class.
     {
         int lines = 0;
@@ -217,7 +217,7 @@ class Customer
         return customer;
     }//End of readRecord method.
 
-    public String[][] method1()
+    public String[][] methodOne()
     {
         String[][] account = readRecord();//Get database from readRecord method.
         for(int index = 1; index < account.length; index++)
@@ -229,9 +229,9 @@ class Customer
         account = duplicateCheck(account);
         //Returns 2D String array containing customer records with transaction IDs.
         return account;
-    }//End of method1 method.
+    }//End of methodOne method.
 
-    public String method2(String accountID)
+    public String methodTwo(String accountID)
     {
         String transID = "";
         String[][] account = readRecord();//Get database from readRecord method.
@@ -249,9 +249,9 @@ class Customer
         }
         //Returns a single transaction ID to the queried customer account.
         return transID;
-    }//End of method2 method.
+    }//End of methodTwo method.
 
-    //Method to check and replace duplicate transaction IDs from method1.
+    //Method to check and replace duplicate transaction IDs from methodOne.
     public String[][] duplicateCheck(String[][] customer)
     {
         /*Nested-loop algorithm to compare one assigned transaction ID from a customer
