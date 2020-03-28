@@ -22,7 +22,7 @@ public class TransactionTest
         input.skip("\n");
 
         /*Print transaction IDs without customer information from 2D array obtained.
-        by calling method1 of Customer class.*/
+        by calling methodOne of Customer class.*/
         if(option == 1)
         {
             String[][] contents = c1.methodOne();
@@ -55,7 +55,7 @@ public class TransactionTest
 
                 accountID = accountID.toLowerCase();
 
-                //Call Method2 to obtain single transaction ID.
+                //Call MethodTwo of Customer class to obtain single transaction ID.
                 transID = c1.methodTwo(accountID);
             
                 if(transID.equals("Invalid."))//When incorrect account ID is typed.
