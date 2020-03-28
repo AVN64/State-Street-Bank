@@ -16,9 +16,9 @@ public class StateStreetBank
         //Initialize Customer class object c1.
         Customer c1 = new Customer();
 
-        /*Call readRecord method from TransactionID class to obtain randomly
+        /*Call methodOne method from Customer class to obtain randomly
         generated transaction ID's for all customers in the csv file.*/
-        final String[][] customer = c1.method1();
+        final String[][] customer = c1.methodOne();
 
         DefaultListModel<String> lModel = new DefaultListModel<>();
         JList<String> transactionList = new JList<>(lModel);
