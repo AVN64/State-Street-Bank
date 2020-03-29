@@ -35,7 +35,7 @@ public class TransactionTest
             //Print transaction IDs and customer information.
             /*String divide = "-";
             int index = 0;
-            for(String[] contents: c1.method1())
+            for(String[] contents: c1.methodOne())
             {
                 index++;
                 System.out.printf("%s%nCustomer #%d%n", divide.repeat(30),index);
