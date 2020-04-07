@@ -162,7 +162,7 @@ class Customer
     methods of Customer class.*/
     final private TransactionID t1 = new TransactionID();
 
-    /*A default constructor for Customer class will be provided the Java compiler
+    /*A default constructor for Customer class will be provided by the Java compiler
     if no constructor is programmed into the class.*/
     public Customer()
     {
