@@ -16,7 +16,7 @@
  * 03/24/2020 - Split original TransactionID class into Customer and TransactionID classes.
  * 04/07/2020 - Edited comments for better program description.
  * 04/19/2020 - Renamed readRecord() method to readCSV(). Edited comments.
- * 04/20/2020 - Removed "accountID = accountID.toLowerCase();"" line to fix account ID
+ * 04/20/2020 - Removed "accountID = accountID.toLowerCase();" line to fix account ID
  *              matching bug.
  */
 import java.io.FileReader;
