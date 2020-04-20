@@ -285,7 +285,6 @@ class Customer
                 transID = "Invalid.";
             }
         }
- 
         return transID;
     }//End of oneTransID method.
 
