@@ -16,6 +16,8 @@
  * 03/24/2020 - Split original TransactionID class into Customer and TransactionID classes.
  * 04/07/2020 - Edited comments for better program description.
  * 04/19/2020 - Renamed readRecord() method to readCSV(). Edited comments.
+ * 04/20/2020 - Removed "accountID = accountID.toLowerCase();"" line to fix account ID
+ *              matching bug.
  */
 import java.io.FileReader;
 import java.io.FileNotFoundException;
@@ -65,9 +67,7 @@ public class TransactionTest
                 System.out.print("Please enter account ID: ");
                 String accountID = input.nextLine();
 
-                accountID = accountID.toLowerCase();
-
-                //Call MethodTwo of Customer class to obtain single transaction ID.
+                //Call oneTransID method of Customer class to obtain single transaction ID.
                 transID = c1.oneTransID(accountID);
             
                 if(transID.equals("Invalid."))//When incorrect account ID is typed.
