@@ -3,7 +3,7 @@
  * 
  * Date: 03/20/2020
  * 
- * @author Group 2 of CSCI 362
+ * @author Andy Nguyen
  * 
  * Description: State Street Bank transaction ID generator
  * This Java program is used to create random 24-digit transaction IDs for customer 
@@ -13,10 +13,11 @@
  * 
  * Notes:
  * 03/20/2020 - Initial Development.
+ * 03/21/2020 - Added oneTransID method for account ID query.
  * 03/24/2020 - Split original TransactionID class into Customer and TransactionID classes.
  * 04/07/2020 - Edited comments for better program description.
  * 04/19/2020 - Renamed readRecord() method to readCSV(). Edited comments.
- * 04/20/2020 - Removed "accountID = accountID.toLowerCase();" line to fix account ID
+ * 04/20/2020 - Removed "accountID = accountID.toLowerCase();" line to fix accountID
  *              matching bug.
  */
 import java.io.FileReader;
@@ -47,13 +48,18 @@ public class TransactionTest
          */
         if(option == 1)
         {
+            long startTime = System.currentTimeMillis();//Calculate runtime.
+
             String[][] contents = c1.allTransIDs();
             for(int i = 0; i < contents.length; i++)
             {
                 /*Print transaction IDs for customers.csv file. Index number is
                 preconditioned to +1 to prevent off-by-one error.*/
-                System.out.printf("%-3d %s%n", i + 1, contents[i][9]);           
+                System.out.printf("%-3d %s%n", i + 1, contents[i][9]);
             }
+            long endTime = System.currentTimeMillis();
+            long totalTime = endTime - startTime;
+            System.out.println(totalTime + "ms");//Display runtime in milliseconds.
         }
         /*
          * Print one transaction ID for queried account ID by calling oneTransID
@@ -199,10 +205,10 @@ class Customer
     /*
      * Method to open customers.csv, read and parse the records of the csv file, and
      * store the tokens in a 2D String array.
-    */
+     */
     private String[][] readCSV()
     {
-        int index = 0;//Count number of customers.
+        int index = 0;//Counter variable for number of customers.
 
         /*
          * 2D String array to store transaction IDs with size determined by number of
@@ -215,10 +221,10 @@ class Customer
             read.useDelimiter("[,\n]");//Delimiter to parse String tokens.
             read.nextLine();//Skip header of csv file.
 
-            while(read.hasNext())//while loop to read lines of customer record.
-            {
+            while(read.hasNext())//while loop to read lines of customer records.
+            {             
                 index++;
-                
+                                          
                 for(int token = 0; token < 9; token++)//For loop of customer attributes.
                 {
                     customer[index][token] = read.next();
@@ -231,7 +237,7 @@ class Customer
                       token 6 = City.
                       token 7 = State.
                       token 8 = ZIP Code.*/
-                }                            
+                }
             }
         } 
         catch (Exception e)
@@ -254,7 +260,7 @@ class Customer
      */
     protected String[][] allTransIDs()
     {
-        String[][] account = readCSV();//
+        String[][] account = readCSV();
         for(int index = 1; index < account.length; index++)
         {
             account[index][9] = t1.getTransID();
